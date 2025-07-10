@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: sistema-reclamacoes
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        hbm2ddl:
+          auto: update
+    generate-ddl: true
+    show-sql: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres-sistema-reclamacoes
