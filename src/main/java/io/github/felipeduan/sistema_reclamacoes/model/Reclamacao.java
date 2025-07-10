@@ -30,4 +30,12 @@ public class Reclamacao {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
+    public Reclamacao(String titulo, String descricao, Usuario usuario) {
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.usuario = usuario;
+        this.status = StatusReclamacao.PENDENTE;
+        this.dataCriacao = LocalDateTime.now();
+    }
+
 }
