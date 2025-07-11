@@ -1,5 +1,6 @@
 package io.github.felipeduan.sistema_reclamacoes.service;
 
+import io.github.felipeduan.sistema_reclamacoes.exception.AcessoNegadoException;
 import io.github.felipeduan.sistema_reclamacoes.exception.ReclamacaoNaoEncontradaException;
 import io.github.felipeduan.sistema_reclamacoes.dto.ReclamacaoDTO;
 import io.github.felipeduan.sistema_reclamacoes.enums.StatusReclamacao;
@@ -34,7 +35,7 @@ public class ReclamacaoService {
                 .orElseThrow(() -> new ReclamacaoNaoEncontradaException("Reclamação não encontrada"));
 
         if (!reclamacao.getCpfUsuario().equals(cpfUsuario)) {
-            throw new ReclamacaoNaoEncontradaException("Você não tem permissão para acessar esta reclamação");
+            throw new AcessoNegadoException("Você não tem permissão para acessar esta reclamação");
         }
 
         return reclamacao;
