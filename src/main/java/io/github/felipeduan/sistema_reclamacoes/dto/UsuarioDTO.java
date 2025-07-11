@@ -6,6 +6,9 @@ import lombok.Data;
 @Data
 public class UsuarioDTO {
 
+    @NotBlank(message = "Nome é obrigatório")
+    private String nome;
+
     @NotBlank(message = "CPF é obrigatório")
     private String cpf;
 

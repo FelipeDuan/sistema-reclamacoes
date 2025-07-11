@@ -17,13 +17,17 @@ public class Usuario {
     @Column(columnDefinition = "uuid", updatable = false, nullable = false)
     private UUID id;
 
+    @Column(nullable = false)
+    private String nome;
+
     @Column(unique = true)
     private String cpf;
 
     @Column(nullable = false)
     private String senha;
 
-    public Usuario(String cpf, String senha) {
+    public Usuario(String nome, String cpf, String senha) {
+        this.nome = nome;
         this.cpf = cpf;
         this.senha = senha;
     }

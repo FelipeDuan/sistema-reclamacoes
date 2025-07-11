@@ -18,9 +18,9 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Usuario registrarUsuario(String cpf, String senha) {
+    public Usuario registrarUsuario(String nome, String cpf, String senha) {
         String senhaCriptografada = passwordEncoder.encode(senha);
-        Usuario usuario = new Usuario(cpf, senhaCriptografada);
+        Usuario usuario = new Usuario(nome, cpf, senhaCriptografada);
 
         return usuarioRepository.save(usuario);
     }
