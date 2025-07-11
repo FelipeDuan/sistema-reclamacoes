@@ -1,4 +1,4 @@
-package io.github.felipeduan.sistema_reclamacoes;
+package io.github.felipeduan.sistema_reclamacoes.exception;
 
 public class ReclamacaoNaoEncontradaException extends RuntimeException {
     public ReclamacaoNaoEncontradaException(String message) {

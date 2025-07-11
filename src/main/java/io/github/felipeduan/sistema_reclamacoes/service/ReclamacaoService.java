@@ -1,8 +1,9 @@
 package io.github.felipeduan.sistema_reclamacoes.service;
 
-import io.github.felipeduan.sistema_reclamacoes.ReclamacaoNaoEncontradaException;
+import io.github.felipeduan.sistema_reclamacoes.exception.ReclamacaoNaoEncontradaException;
 import io.github.felipeduan.sistema_reclamacoes.dto.ReclamacaoDTO;
 import io.github.felipeduan.sistema_reclamacoes.enums.StatusReclamacao;
+import io.github.felipeduan.sistema_reclamacoes.exception.ReclamacaoStatusInvalido;
 import io.github.felipeduan.sistema_reclamacoes.model.Reclamacao;
 import io.github.felipeduan.sistema_reclamacoes.repository.ReclamacaoRepository;
 import org.springframework.stereotype.Service;
@@ -39,13 +40,22 @@ public class ReclamacaoService {
         return reclamacao;
     }
 
-    public Reclamacao atualizarStatus(UUID id, String cpfUsuario, StatusReclamacao novoStatus) {
+    public Reclamacao atualizarStatusParaRespondido(UUID id, String cpfUsuario) {
         Reclamacao reclamacao = buscarReclamacaoDoUsuario(id, cpfUsuario);
-        reclamacao.setStatus(novoStatus);
+        reclamacao.setStatus(StatusReclamacao.RESPONDIDO);
         return reclamacaoRepository.save(reclamacao);
     }
 
     // ToDo: Criar método de Atualizar Reclamacao somente com status PENDENTE
 
     // ToDo: Criar método de Deletar Reclamacao somente com status PENDENTE
+    public void deletarReclamacao(UUID id, String cpfUsuario) {
+        Reclamacao reclamacao = buscarReclamacaoDoUsuario(id, cpfUsuario);
+
+        if (!reclamacao.getStatus().equals(StatusReclamacao.PENDENTE)) {
+            throw new ReclamacaoStatusInvalido("Não é possível realizar essa operação, pois o status não é pendente");
+        }
+
+        reclamacaoRepository.delete(reclamacao);
+    }
 }
