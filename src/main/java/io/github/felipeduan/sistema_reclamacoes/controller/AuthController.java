@@ -1,5 +1,6 @@
 package io.github.felipeduan.sistema_reclamacoes.controller;
 
+import io.github.felipeduan.sistema_reclamacoes.dto.LoginDTO;
 import io.github.felipeduan.sistema_reclamacoes.dto.UsuarioDTO;
 import io.github.felipeduan.sistema_reclamacoes.model.Usuario;
 import io.github.felipeduan.sistema_reclamacoes.security.JwtUtil;
@@ -35,7 +36,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody UsuarioDTO dto) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginDTO dto) {
         Optional<Usuario> usuario = usuarioService.buscarPorCpf(dto.getCpf());
 
         if (usuario.isPresent() && passwordEncoder.matches(dto.getSenha(), usuario.get().getSenha())) {
