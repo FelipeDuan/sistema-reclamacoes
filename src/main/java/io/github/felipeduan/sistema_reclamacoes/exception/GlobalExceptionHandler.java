@@ -26,7 +26,12 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ReclamacaoNaoEncontradaException.class)
     public ResponseEntity<Object> handleReclamacaoNaoEncontrada(ReclamacaoNaoEncontradaException ex) {
-        return buildResponse(HttpStatus.NOT_FOUND, "Recurso não encontrado", ex.getMessage());
+        return buildResponse(HttpStatus.NOT_FOUND, "Reclamação não encontrada", ex.getMessage());
+    }
+
+    @ExceptionHandler(ReclamacaoStatusInvalido.class)
+    public ResponseEntity<Object> handleReclamacaoStatusInvalido(ReclamacaoStatusInvalido ex) {
+        return buildResponse(HttpStatus.BAD_REQUEST, "Reclamação com status PENDENTE", ex.getMessage());
     }
 
     @ExceptionHandler(AcessoNegadoException.class)

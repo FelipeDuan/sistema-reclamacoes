@@ -48,6 +48,18 @@ public class ReclamacaoService {
     }
 
     // ToDo: Criar método de Atualizar Reclamacao somente com status PENDENTE
+    public Reclamacao atualizarReclamacao(UUID id, String cpfUsuario, ReclamacaoDTO dto) {
+        Reclamacao reclamacao = buscarReclamacaoDoUsuario(id, cpfUsuario);
+
+        if (!reclamacao.getStatus().equals(StatusReclamacao.PENDENTE)) {
+            throw new ReclamacaoStatusInvalido("Não é possível realizar essa operação, pois o status não é pendente");
+        }
+
+        reclamacao.setTitulo(dto.getTitulo());
+        reclamacao.setDescricao(dto.getDescricao());
+
+        return reclamacaoRepository.save(reclamacao);
+    }
 
     // ToDo: Criar método de Deletar Reclamacao somente com status PENDENTE
     public void deletarReclamacao(UUID id, String cpfUsuario) {

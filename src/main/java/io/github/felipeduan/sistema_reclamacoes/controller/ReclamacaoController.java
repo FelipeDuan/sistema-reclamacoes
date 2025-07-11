@@ -48,6 +48,14 @@ public class ReclamacaoController {
         return ResponseEntity.ok(reclamacao);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Reclamacao> atualizar(@PathVariable UUID id, @Valid @RequestBody ReclamacaoDTO dto,
+                                                Authentication authentication) {
+        String cpfUsuario = authentication.getName();
+        Reclamacao reclamacaoAtualizada = reclamacaoService.atualizarReclamacao(id, cpfUsuario, dto);
+        return ResponseEntity.ok(reclamacaoAtualizada);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable UUID id, Authentication authentication) {
         String cpfUsuario = authentication.getName();
