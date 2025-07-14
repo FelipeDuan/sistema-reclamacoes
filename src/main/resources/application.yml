@@ -14,5 +14,5 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: postgres
-    url: jdbc:postgresql://localhost:5432/postgres-sistema-reclamacoes
+    password: liLdQUGIgEqJzAGAWYFBmknCQkSKLlFX
+    url: jdbc:postgresql://trolley.proxy.rlwy.net:45214/railway
