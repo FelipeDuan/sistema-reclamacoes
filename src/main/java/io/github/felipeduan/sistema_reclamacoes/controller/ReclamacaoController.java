@@ -40,6 +40,13 @@ public class ReclamacaoController {
         return ResponseEntity.ok(reclamacoes);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Reclamacao> buscar(@PathVariable UUID id, Authentication authentication) {
+        String cpfUsuario = authentication.getName();
+        Reclamacao reclamacao = reclamacaoService.buscarReclamacaoDoUsuario(id, cpfUsuario);
+        return ResponseEntity.ok(reclamacao);
+    }
+
     @PutMapping("/{id}/status")
     public ResponseEntity<Reclamacao> atualizarStatus(@PathVariable UUID id, Authentication authentication) {
         String cpfUsuario = authentication.getName();

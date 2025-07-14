@@ -6,6 +6,7 @@ import io.github.felipeduan.sistema_reclamacoes.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -32,5 +33,12 @@ public class UsuarioService {
 
     public Optional<Usuario> buscarPorCpf(String cpf) {
         return usuarioRepository.findByCpf(cpf);
+    }
+
+    public Map<String, String> meuNome(String cpf) {
+        Usuario usuario = usuarioRepository.findByCpf(cpf)
+                .orElseThrow(() -> new UsuarioNaoCadastradoException("Usuário não encontrado."));
+
+        return Map.of("nome", usuario.getNome());
     }
 }

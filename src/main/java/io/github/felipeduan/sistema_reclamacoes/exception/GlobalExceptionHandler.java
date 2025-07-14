@@ -2,6 +2,7 @@ package io.github.felipeduan.sistema_reclamacoes.exception;
 
 import io.github.felipeduan.sistema_reclamacoes.helpers.ResponseHelper;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -62,7 +63,10 @@ public class GlobalExceptionHandler {
                 ));
 
         body.put("fields", errors);
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(body);
     }
 
     @ExceptionHandler(Exception.class)
