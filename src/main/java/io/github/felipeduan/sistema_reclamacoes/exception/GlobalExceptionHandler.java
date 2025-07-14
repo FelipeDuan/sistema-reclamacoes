@@ -1,5 +1,6 @@
 package io.github.felipeduan.sistema_reclamacoes.exception;
 
+import io.github.felipeduan.sistema_reclamacoes.helpers.ResponseHelper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -22,6 +23,11 @@ public class GlobalExceptionHandler {
         body.put("error", error);
         body.put("message", message);
         return new ResponseEntity<>(body, status);
+    }
+
+    @ExceptionHandler(UsuarioNaoCadastradoException.class)
+    public ResponseEntity<Object> handleUsuarioNaoCadastrado(UsuarioNaoCadastradoException ex) {
+        return ResponseHelper.failure(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ReclamacaoNaoEncontradaException.class)

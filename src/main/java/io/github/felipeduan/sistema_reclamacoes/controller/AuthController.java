@@ -2,6 +2,7 @@ package io.github.felipeduan.sistema_reclamacoes.controller;
 
 import io.github.felipeduan.sistema_reclamacoes.dto.LoginDTO;
 import io.github.felipeduan.sistema_reclamacoes.dto.UsuarioDTO;
+import io.github.felipeduan.sistema_reclamacoes.helpers.ResponseHelper;
 import io.github.felipeduan.sistema_reclamacoes.model.Usuario;
 import io.github.felipeduan.sistema_reclamacoes.security.JwtUtil;
 import io.github.felipeduan.sistema_reclamacoes.service.UsuarioService;
@@ -32,7 +33,7 @@ public class AuthController {
     @PostMapping("/registrar")
     public ResponseEntity<?> registrar(@Valid @RequestBody UsuarioDTO dto) {
         usuarioService.registrarUsuario(dto.getNome(), dto.getCpf(), dto.getSenha());
-        return ResponseEntity.ok("Usuário registrado com sucesso");
+        return ResponseHelper.success("Usuário registrado com sucesso");
     }
 
     @PostMapping("/login")

@@ -1,5 +1,6 @@
 package io.github.felipeduan.sistema_reclamacoes.service;
 
+import io.github.felipeduan.sistema_reclamacoes.exception.UsuarioNaoCadastradoException;
 import io.github.felipeduan.sistema_reclamacoes.model.Usuario;
 import io.github.felipeduan.sistema_reclamacoes.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,6 +20,10 @@ public class UsuarioService {
     }
 
     public Usuario registrarUsuario(String nome, String cpf, String senha) {
+        if (usuarioRepository.existsByCpf(cpf)) {
+            throw new UsuarioNaoCadastradoException("Um usuário com este CPF já existe.");
+        }
+
         String senhaCriptografada = passwordEncoder.encode(senha);
         Usuario usuario = new Usuario(nome, cpf, senhaCriptografada);
 

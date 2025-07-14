@@ -15,7 +15,6 @@ import java.util.UUID;
 @RequestMapping("/api/reclamacoes")
 public class ReclamacaoController {
 
-    // ToDo: depois lembrar de apagar essa rota aqui, é só para teste
     @GetMapping("/hello")
     public String helloReclamacao() {
         return "Esse é o controller de reclamacoes";
