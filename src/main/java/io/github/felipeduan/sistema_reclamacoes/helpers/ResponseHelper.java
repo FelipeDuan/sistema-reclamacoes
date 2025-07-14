@@ -12,7 +12,7 @@ public class ResponseHelper {
     public static ResponseEntity<Object> success(String message) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", true);
+        body.put("status", Boolean.TRUE);
         body.put("message", message);
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
@@ -20,7 +20,7 @@ public class ResponseHelper {
     public static ResponseEntity<Object> failure(String message, HttpStatus status) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());
-        body.put("status", false);
+        body.put("status", Boolean.FALSE);
         body.put("message", message);
         return new ResponseEntity<>(body, status);
     }
